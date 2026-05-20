@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Profile — Pasalify{% endblock %}
+{% block content %}
+<div class="profile-card">
+    <h2>👤 My Profile</h2>
+    <p><strong>Name:</strong>  {{ user.name }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Role:</strong>  {{ user.role }}</p>
+    <p><strong>Phone:</strong> {{ user.phone or "Not set" }}</p>
+    <p><strong>Address:</strong> {{ user.address or "Not set" }}</p>
+    <p><strong>Joined:</strong>  {{ user.created_at }}</p>
+    <a href="{{ url_for('auth.change_password') }}"
+       class="btn btn-outline">Change Password</a>
+</div>
+{% endblock %}

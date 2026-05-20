@@ -1,0 +1,33 @@
+{% extends "seller/base_seller.html" %}
+{% block title %}
+    {% if pid %}Edit{% else %}Add{% endif %} Product — Pasalify
+{% endblock %}
+{% block seller_content %}
+<h2>{% if pid %}✏️ Edit{% else %}➕ Add{% endif %} Product</h2>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{ form.name.label }}
+        {{ form.name(class="form-control") }}
+    </div>
+    <div class="form-group">
+        {{ form.description.label }}
+        {{ form.description(class="form-control", rows=4) }}
+    </div>
+    <div class="form-group">
+        {{ form.price.label }}
+        {{ form.price(class="form-control") }}
+    </div>
+    <div class="form-group">
+        {{ form.stock.label }}
+        {{ form.stock(class="form-control") }}
+    </div>
+    <div class="form-group">
+        {{ form.category.label }}
+        {{ form.category(class="form-control") }}
+    </div>
+    {{ form.submit(class="btn btn-primary") }}
+    <a href="{{ url_for('seller.products') }}"
+       class="btn btn-outline">Cancel</a>
+</form>
+{% endblock %}

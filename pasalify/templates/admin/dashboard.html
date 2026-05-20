@@ -1,0 +1,22 @@
+{% extends "admin/base_admin.html" %}
+{% block title %}Admin Dashboard — Pasalify{% endblock %}
+{% block admin_content %}
+<h2>📊 Admin Dashboard</h2>
+<div class="stats-grid">
+    <div class="stat-card">
+        <h3>{{ stats.users }}</h3><p>Total Users</p>
+    </div>
+    <div class="stat-card">
+        <h3>{{ stats.sellers }}</h3><p>Sellers</p>
+    </div>
+    <div class="stat-card">
+        <h3>{{ stats.products }}</h3><p>Products</p>
+    </div>
+    <div class="stat-card">
+        <h3>{{ stats.orders }}</h3><p>Orders</p>
+    </div>
+    <div class="stat-card">
+        <h3>Rs. {{ stats.revenue }}</h3><p>Revenue</p>
+    </div>
+</div>
+{% endblock %}

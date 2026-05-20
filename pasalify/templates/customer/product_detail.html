@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}{{ product.name }} — Pasalify{% endblock %}
+{% block content %}
+<div class="product-detail">
+    <h2>{{ product.name }}</h2>
+    <p class="price">Rs. {{ product.price }}</p>
+    <p>Category: {{ product.category }}</p>
+    <p>⭐ {{ product.rating }} ({{ product.reviews_count }} reviews)</p>
+    <p>Stock: {{ product.stock }}</p>
+    <p>{{ product.description }}</p>
+    <form method="POST"
+          action="{{ url_for('customer.add_to_cart', pid=product.id) }}">
+        <input type="hidden" name="csrf_token"
+               value="{{ csrf_token() }}"/>
+        <button class="btn btn-primary">🛒 Add to Cart</button>
+    </form>
+    <form method="POST"
+          action="{{ url_for('customer.toggle_wishlist', pid=product.id) }}">
+        <input type="hidden" name="csrf_token"
+               value="{{ csrf_token() }}"/>
+        <button class="btn btn-outline">♥ Wishlist</button>
+    </form>
+</div>
+{% endblock %}

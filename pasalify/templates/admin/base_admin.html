@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="seller-layout">
+    <aside class="sidebar sidebar-admin">
+        <h3>⚙️ Admin Panel</h3>
+        <nav>
+            <a href="{{ url_for('admin.dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('admin.sellers') }}">Sellers</a>
+            <a href="{{ url_for('admin.products') }}">Products</a>
+            <a href="{{ url_for('admin.users') }}">Users</a>
+            <a href="{{ url_for('admin.finances') }}">Finances</a>
+            <a href="{{ url_for('admin.promos') }}">Promos</a>
+            <a href="{{ url_for('admin.categories') }}">Categories</a>
+            <a href="{{ url_for('admin.system') }}">System</a>
+        </nav>
+    </aside>
+    <div class="seller-content">
+        {% block admin_content %}{% endblock %}
+    </div>
+</div>
+{% endblock %}

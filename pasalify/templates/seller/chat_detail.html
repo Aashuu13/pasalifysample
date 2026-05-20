@@ -1,0 +1,21 @@
+{% extends "seller/base_seller.html" %}
+{% block title %}Chat — Pasalify{% endblock %}
+{% block seller_content %}
+<h2>💬 Chat</h2>
+{% if chat %}
+    <div class="chat-box">
+        {% for msg in chat.get("messages", []) %}
+        <div class="chat-msg {{ 'sent' if msg.sender_id == session.user_id else 'received' }}">
+            <p>{{ msg.text }}</p>
+            <small>{{ msg.time }}</small>
+        </div>
+        {% else %}
+        <p>No messages yet.</p>
+        {% endfor %}
+    </div>
+{% else %}
+<p>Chat not found.</p>
+{% endif %}
+<a href="{{ url_for('seller.chats') }}"
+   class="btn btn-outline">← Back</a>
+{% endblock %}

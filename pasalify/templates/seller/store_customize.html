@@ -1,0 +1,19 @@
+{% extends "seller/base_seller.html" %}
+{% block title %}Customize Store — Pasalify{% endblock %}
+{% block seller_content %}
+<h2>🎨 Customize Store</h2>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{ form.theme_color.label }}
+        {{ form.theme_color(class="form-control",
+                            type="color",
+                            value=store.theme_color if store else "#6c5ce7") }}
+    </div>
+    <div class="form-group">
+        {{ form.description.label }}
+        {{ form.description(class="form-control", rows=4) }}
+    </div>
+    {{ form.submit(class="btn btn-primary") }}
+</form>
+{% endblock %}

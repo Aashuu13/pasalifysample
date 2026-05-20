@@ -1,0 +1,41 @@
+{% extends "seller/base_seller.html" %}
+{% block title %}Orders — Pasalify{% endblock %}
+{% block seller_content %}
+<h2>📬 Orders</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th><th>Date</th><th>Total</th>
+            <th>Status</th><th>Update</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for o in orders %}
+        <tr>
+            <td>#{{ o.id }}</td>
+            <td>{{ o.created_at }}</td>
+            <td>Rs. {{ o.total }}</td>
+            <td>{{ o.status }}</td>
+            <td>
+                <form method="POST"
+                      action="{{ url_for('seller.update_status', oid=o.id) }}">
+                    <input type="hidden" name="csrf_token"
+                           value="{{ csrf_token() }}"/>
+                    <select name="status">
+                        {% for s in ["Processing","Shipped","Delivered","Cancelled"] %}
+                        <option value="{{ s }}"
+                            {% if o.status == s %}selected{% endif %}>
+                            {{ s }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                    <button class="btn btn-sm btn-primary">Update</button>
+                </form>
+            </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="5">No orders yet.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

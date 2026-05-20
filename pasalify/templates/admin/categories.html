@@ -1,0 +1,32 @@
+{% extends "admin/base_admin.html" %}
+{% block title %}Categories — Pasalify{% endblock %}
+{% block admin_content %}
+<h2>🗂️ Categories</h2>
+<form method="POST" class="inline-form">
+    {{ form.hidden_tag() }}
+    {{ form.name(class="form-control",
+                 placeholder="Category name") }}
+    {{ form.submit(class="btn btn-primary") }}
+</form>
+<table class="table">
+    <thead>
+        <tr><th>Category</th><th>Action</th></tr>
+    </thead>
+    <tbody>
+        {% for cat in categories %}
+        <tr>
+            <td>{{ cat }}</td>
+            <td>
+                <form method="POST"
+                      action="{{ url_for('admin.delete_category',
+                                        name=cat) }}">
+                    <input type="hidden" name="csrf_token"
+                           value="{{ csrf_token() }}"/>
+                    <button class="btn btn-sm btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

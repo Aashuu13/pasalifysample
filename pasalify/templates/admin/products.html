@@ -1,0 +1,42 @@
+{% extends "admin/base_admin.html" %}
+{% block title %}Products — Pasalify{% endblock %}
+{% block admin_content %}
+<h2>📦 All Products</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th><th>Price</th>
+            <th>Approved</th><th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for p in products %}
+        <tr>
+            <td>{{ p.name }}</td>
+            <td>Rs. {{ p.price }}</td>
+            <td>
+                {% if p.is_approved %}✅{% else %}⏳{% endif %}
+            </td>
+            <td>
+                <form method="POST"
+                      action="{{ url_for('admin.approve_product',
+                                        pid=p.id) }}"
+                      style="display:inline">
+                    <input type="hidden" name="csrf_token"
+                           value="{{ csrf_token() }}"/>
+                    <button class="btn btn-sm btn-success">Approve</button>
+                </form>
+                <form method="POST"
+                      action="{{ url_for('admin.delete_product',
+                                        pid=p.id) }}"
+                      style="display:inline">
+                    <input type="hidden" name="csrf_token"
+                           value="{{ csrf_token() }}"/>
+                    <button class="btn btn-sm btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Products — Pasalify{% endblock %}
+{% block content %}
+<h2>🛍️ All Products</h2>
+<form method="GET" class="search-bar">
+    <input type="text" name="search"
+           value="{{ search }}" placeholder="Search products..."/>
+    <select name="category">
+        <option value="">All Categories</option>
+        {% for cat in categories %}
+        <option value="{{ cat }}"
+            {% if cat == selected_cat %}selected{% endif %}>
+            {{ cat }}
+        </option>
+        {% endfor %}
+    </select>
+    <button class="btn btn-primary">Search</button>
+</form>
+<div class="product-grid">
+    {% for p in products %}
+    <div class="product-card">
+        <h3>{{ p.name }}</h3>
+        <p class="price">Rs. {{ p.price }}</p>
+        <p>{{ p.category }} | ⭐ {{ p.rating }}</p>
+        <a href="{{ url_for('customer.product_detail', pid=p.id) }}"
+           class="btn btn-sm">View</a>
+        <form method="POST"
+              action="{{ url_for('customer.add_to_cart', pid=p.id) }}">
+            <input type="hidden" name="csrf_token"
+                   value="{{ csrf_token() }}"/>
+            <button class="btn btn-sm btn-success">Add to Cart</button>
+        </form>
+    </div>
+    {% else %}
+    <p>No products found.</p>
+    {% endfor %}
+</div>
+{% endblock %}

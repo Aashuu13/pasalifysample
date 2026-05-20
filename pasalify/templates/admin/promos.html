@@ -1,0 +1,35 @@
+{% extends "admin/base_admin.html" %}
+{% block title %}Promos — Pasalify{% endblock %}
+{% block admin_content %}
+<h2>🎟️ Promo Codes</h2>
+<form method="POST" class="inline-form">
+    {{ form.hidden_tag() }}
+    {{ form.code(class="form-control",
+                 placeholder="PROMO CODE") }}
+    {{ form.discount(class="form-control",
+                     placeholder="Discount %") }}
+    {{ form.submit(class="btn btn-primary") }}
+</form>
+<table class="table">
+    <thead>
+        <tr><th>Code</th><th>Discount</th><th>Action</th></tr>
+    </thead>
+    <tbody>
+        {% for code, disc in promos.items() %}
+        <tr>
+            <td>{{ code }}</td>
+            <td>{{ disc }}%</td>
+            <td>
+                <form method="POST"
+                      action="{{ url_for('admin.delete_promo',
+                                        code=code) }}">
+                    <input type="hidden" name="csrf_token"
+                           value="{{ csrf_token() }}"/>
+                    <button class="btn btn-sm btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

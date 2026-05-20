@@ -1,0 +1,35 @@
+{% extends "admin/base_admin.html" %}
+{% block title %}Finances — Pasalify{% endblock %}
+{% block admin_content %}
+<h2>💰 Finances</h2>
+<div class="stats-grid">
+    <div class="stat-card">
+        <h3>Rs. {{ data.total_revenue }}</h3>
+        <p>Total Revenue</p>
+    </div>
+    <div class="stat-card">
+        <h3>{{ data.total_orders }}</h3>
+        <p>Total Orders</p>
+    </div>
+</div>
+<h3>All Orders</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th><th>Date</th>
+            <th>Payment</th><th>Total</th><th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for o in data.orders %}
+        <tr>
+            <td>#{{ o.id }}</td>
+            <td>{{ o.created_at }}</td>
+            <td>{{ o.payment_method }}</td>
+            <td>Rs. {{ o.total }}</td>
+            <td>{{ o.status }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

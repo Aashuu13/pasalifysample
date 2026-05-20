@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}{{ store.store_name }} — Pasalify{% endblock %}
+{% block content %}
+<div class="store-hero"
+     style="border-top: 5px solid {{ store.theme_color }}">
+    <h1>🏪 {{ store.store_name }}</h1>
+    <p>{{ store.description }}</p>
+    <a href="{{ url_for('store.chat', slug=store.slug) }}"
+       class="btn btn-outline">💬 Chat with Seller</a>
+</div>
+<h2>Products</h2>
+<div class="product-grid">
+    {% for p in products %}
+    <div class="product-card">
+        <h3>{{ p.name }}</h3>
+        <p class="price">Rs. {{ p.price }}</p>
+        <p>{{ p.category }}</p>
+        <a href="{{ url_for('customer.product_detail', pid=p.id) }}"
+           class="btn btn-sm">View</a>
+    </div>
+    {% else %}
+    <p>No products in this store.</p>
+    {% endfor %}
+</div>
+{% endblock %}

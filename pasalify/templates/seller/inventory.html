@@ -1,0 +1,36 @@
+{% extends "seller/base_seller.html" %}
+{% block title %}Inventory — Pasalify{% endblock %}
+{% block seller_content %}
+<h2>📋 Inventory</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product</th><th>Stock</th><th>Price</th><th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for p in products %}
+        <tr>
+            <td>{{ p.name }}</td>
+            <td>
+                {% if p.stock == 0 %}
+                    <span class="badge badge-danger">Out of Stock</span>
+                {% elif p.stock < 5 %}
+                    <span class="badge badge-warning">Low: {{ p.stock }}</span>
+                {% else %}
+                    {{ p.stock }}
+                {% endif %}
+            </td>
+            <td>Rs. {{ p.price }}</td>
+            <td>
+                {% if p.is_approved %}
+                    <span class="badge badge-success">Approved</span>
+                {% else %}
+                    <span class="badge badge-warning">Pending</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

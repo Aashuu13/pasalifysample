@@ -1,0 +1,10 @@
+{% extends "seller/base_seller.html" %}
+{% block title %}Categories — Pasalify{% endblock %}
+{% block seller_content %}
+<h2>🗂️ Categories</h2>
+<ul class="list-clean">
+    {% for cat in categories %}
+    <li>{{ cat }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

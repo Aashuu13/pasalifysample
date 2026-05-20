@@ -1,0 +1,44 @@
+{% extends "admin/base_admin.html" %}
+{% block title %}Sellers — Pasalify{% endblock %}
+{% block admin_content %}
+<h2>🏪 Sellers</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Store</th><th>Status</th><th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for s in sellers %}
+        <tr>
+            <td>{{ s.store_name }}</td>
+            <td>
+                {% if s.is_approved %}
+                    <span class="badge badge-success">Approved</span>
+                {% else %}
+                    <span class="badge badge-warning">Pending</span>
+                {% endif %}
+            </td>
+            <td>
+                <form method="POST"
+                      action="{{ url_for('admin.approve_seller',
+                                        uid=s.user_id) }}"
+                      style="display:inline">
+                    <input type="hidden" name="csrf_token"
+                           value="{{ csrf_token() }}"/>
+                    <button class="btn btn-sm btn-success">Approve</button>
+                </form>
+                <form method="POST"
+                      action="{{ url_for('admin.reject_seller',
+                                        uid=s.user_id) }}"
+                      style="display:inline">
+                    <input type="hidden" name="csrf_token"
+                           value="{{ csrf_token() }}"/>
+                    <button class="btn btn-sm btn-danger">Reject</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

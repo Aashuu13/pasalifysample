@@ -1,0 +1,16 @@
+{% extends "seller/base_seller.html" %}
+{% block title %}Reviews — Pasalify{% endblock %}
+{% block seller_content %}
+<h2>⭐ Reviews</h2>
+{% if reviews %}
+    {% for r in reviews %}
+    <div class="review-card">
+        <p><strong>{{ r.user_name }}</strong> — ⭐ {{ r.rating }}</p>
+        <p>{{ r.comment }}</p>
+        <small>{{ r.date }}</small>
+    </div>
+    {% endfor %}
+{% else %}
+<p>No reviews yet.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Register — Pasalify{% endblock %}
+{% block content %}
+<div class="auth-card">
+    <h2>📝 Register</h2>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            {{ form.name.label }}
+            {{ form.name(class="form-control",
+                         placeholder="Full Name") }}
+        </div>
+        <div class="form-group">
+            {{ form.email.label }}
+            {{ form.email(class="form-control",
+                          placeholder="you@email.com") }}
+        </div>
+        <div class="form-group">
+            {{ form.password.label }}
+            {{ form.password(class="form-control",
+                             placeholder="Min 6 characters") }}
+        </div>
+        <div class="form-group">
+            {{ form.confirm.label }}
+            {{ form.confirm(class="form-control",
+                            placeholder="Repeat password") }}
+        </div>
+        <div class="form-group">
+            {{ form.role.label }}
+            {{ form.role(class="form-control") }}
+        </div>
+        {{ form.submit(class="btn btn-primary btn-block") }}
+    </form>
+    <p class="auth-links">
+        Already have an account?
+        <a href="{{ url_for('auth.login') }}">Login</a>
+    </p>
+</div>
+{% endblock %}

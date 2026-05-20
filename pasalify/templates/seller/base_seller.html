@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="seller-layout">
+    <aside class="sidebar">
+        <h3>🏪 Seller Panel</h3>
+        <nav>
+            <a href="{{ url_for('seller.dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('seller.store_profile') }}">Store Profile</a>
+            <a href="{{ url_for('seller.store_customize') }}">Customize</a>
+            <a href="{{ url_for('seller.products') }}">Products</a>
+            <a href="{{ url_for('seller.categories') }}">Categories</a>
+            <a href="{{ url_for('seller.inventory') }}">Inventory</a>
+            <a href="{{ url_for('seller.orders') }}">Orders</a>
+            <a href="{{ url_for('seller.reviews') }}">Reviews</a>
+            <a href="{{ url_for('seller.chats') }}">Chats</a>
+        </nav>
+    </aside>
+    <div class="seller-content">
+        {% block seller_content %}{% endblock %}
+    </div>
+</div>
+{% endblock %}

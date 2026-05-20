@@ -1,0 +1,16 @@
+{% extends "seller/base_seller.html" %}
+{% block title %}Chats — Pasalify{% endblock %}
+{% block seller_content %}
+<h2>💬 Chats</h2>
+{% if chats %}
+    {% for c in chats %}
+    <div class="chat-preview">
+        <p>Chat #{{ c.id }}</p>
+        <a href="{{ url_for('seller.chat_detail', cid=c.id) }}"
+           class="btn btn-sm">Open</a>
+    </div>
+    {% endfor %}
+{% else %}
+<p>No chats yet.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "seller/base_seller.html" %}
+{% block title %}My Products — Pasalify{% endblock %}
+{% block seller_content %}
+<div class="section-header">
+    <h2>📦 My Products</h2>
+    <a href="{{ url_for('seller.product_form') }}"
+       class="btn btn-primary">+ Add Product</a>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th><th>Price</th><th>Stock</th>
+            <th>Category</th><th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for p in products %}
+        <tr>
+            <td>{{ p.name }}</td>
+            <td>Rs. {{ p.price }}</td>
+            <td>{{ p.stock }}</td>
+            <td>{{ p.category }}</td>
+            <td>
+                <a href="{{ url_for('seller.product_form', pid=p.id) }}"
+                   class="btn btn-sm">Edit</a>
+                <form method="POST"
+                      action="{{ url_for('seller.delete_product', pid=p.id) }}"
+                      style="display:inline">
+                    <input type="hidden" name="csrf_token"
+                           value="{{ csrf_token() }}"/>
+                    <button class="btn btn-sm btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="5">No products yet.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

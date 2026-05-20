@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Checkout — Pasalify{% endblock %}
+{% block content %}
+<h2>💳 Checkout</h2>
+<div class="checkout-grid">
+    <div>
+        <h3>Order Summary</h3>
+        {% for item in items %}
+        <p>{{ item.name }} × {{ item.qty }} —
+           Rs. {{ item.subtotal }}</p>
+        {% endfor %}
+        <p><strong>Total: Rs. {{ total }}</strong></p>
+    </div>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            {{ form.address.label }}
+            {{ form.address(class="form-control",
+                            placeholder="Delivery address") }}
+        </div>
+        <div class="form-group">
+            {{ form.payment_method.label }}
+            {{ form.payment_method(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.promo_code.label }}
+            {{ form.promo_code(class="form-control",
+                               placeholder="Optional promo code") }}
+        </div>
+        {{ form.submit(class="btn btn-primary btn-block") }}
+    </form>
+</div>
+{% endblock %}

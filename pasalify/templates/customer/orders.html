@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}My Orders — Pasalify{% endblock %}
+{% block content %}
+<h2>📦 My Orders</h2>
+{% if orders %}
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th><th>Date</th>
+            <th>Total</th><th>Status</th><th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for o in orders %}
+        <tr>
+            <td>#{{ o.id }}</td>
+            <td>{{ o.created_at }}</td>
+            <td>Rs. {{ o.total }}</td>
+            <td>
+                <span class="badge badge-{{ o.status|lower }}">
+                    {{ o.status }}
+                </span>
+            </td>
+            <td>
+                <a href="{{ url_for('customer.order_detail',
+                                    oid=o.id) }}"
+                   class="btn btn-sm">View</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No orders yet.
+   <a href="{{ url_for('customer.products') }}">Shop Now</a>
+</p>
+{% endif %}
+{% endblock %}
+

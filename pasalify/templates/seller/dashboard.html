@@ -1,0 +1,42 @@
+{% extends "seller/base_seller.html" %}
+{% block title %}Seller Dashboard — Pasalify{% endblock %}
+{% block seller_content %}
+<h2>📊 Dashboard</h2>
+{% if store %}
+<div class="stats-grid">
+    <div class="stat-card">
+        <h3>{{ products|length }}</h3>
+        <p>Products</p>
+    </div>
+    <div class="stat-card">
+        <h3>{{ orders|length }}</h3>
+        <p>Orders</p>
+    </div>
+    <div class="stat-card">
+        <h3>Rs. {{ store.total_sales }}</h3>
+        <p>Total Sales</p>
+    </div>
+</div>
+<h3>Recent Orders</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Order ID</th><th>Status</th><th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for o in orders[:5] %}
+        <tr>
+            <td>#{{ o.id }}</td>
+            <td>{{ o.status }}</td>
+            <td>Rs. {{ o.total }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>Store not set up yet.
+   <a href="{{ url_for('seller.setup') }}">Setup Now</a>
+</p>
+{% endif %}
+{% endblock %}

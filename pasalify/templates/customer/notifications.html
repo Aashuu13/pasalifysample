@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Notifications — Pasalify{% endblock %}
+{% block content %}
+<h2>🔔 Notifications</h2>
+{% if notifications %}
+    {% for n in notifications %}
+    <div class="notif-card {% if not n.read %}unread{% endif %}">
+        <p>{{ n.message }}</p>
+        <small>{{ n.date }}</small>
+    </div>
+    {% endfor %}
+{% else %}
+<p>No notifications.</p>
+{% endif %}
+{% endblock %}
