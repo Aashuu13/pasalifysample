@@ -43,6 +43,18 @@ body {
     color: #fff;
     text-decoration: none;
 }
+/* ── Brand Logo ──────────────────── */
+.brand img {
+    height: 45px;
+    width: auto;
+    object-fit: contain;
+    vertical-align: middle;
+    transition: opacity 0.2s ease;
+}
+.brand img:hover {
+    opacity: 0.85;
+}
+
 .nav-links a, .nav-links span {
     color: #fff;
     text-decoration: none;
@@ -363,14 +375,3 @@ body {
     font-size: .88rem;
 }
 
-/* ── Brand Logo ──────────────────── */
-.brand img {
-    height: 45px;
-    width: auto;
-    object-fit: contain;
-    vertical-align: middle;
-    transition: opacity 0.2s ease;
-}
-.brand img:hover {
-    opacity: 0.85;
-}
